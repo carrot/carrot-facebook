@@ -1,6 +1,6 @@
 # Carrot::Facebook
 
-TODO: Write a gem description
+Facebook view helpers and signed request handling.
 
 ## Installation
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Coming Soon.
 
 ## Contributing
 

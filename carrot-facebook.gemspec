@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Carrot::Facebook::VERSION
   gem.authors       = ["Tom Milewski", "Kyle MacDonald"]
   gem.email         = ["tmilewski@gmail.com", "kyle@carrotcreative.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Facebook view helpers and signed request handling.}
+  gem.summary       = %q{Facebook view helpers and signed request handling.}
   gem.homepage      = "http://carrotcreative.com/"
 
   gem.files         = `git ls-files`.split($/)
