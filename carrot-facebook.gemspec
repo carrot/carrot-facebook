@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency "yajl-ruby"
+  gem.add_dependency "p3p"
   gem.add_development_dependency "rails"
   gem.add_development_dependency "rspec"
 end
