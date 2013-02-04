@@ -153,4 +153,16 @@ describe Carrot::Facebook::Middleware do
       expect(@request[:facebook_data]).to eq @valid_facebook_data.merge({ issued_at: 1331669185, app_data: { path: '/page/terms' } })
     end
   end
+
+  context "when sending parameters in the request" do
+    before(:all) do
+      @signed_request = 'signed_request=PGQuysjAoFJBxu2Me_HizoVv8BdiPdm5wBhkcdHZaR0.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImFwcF9kYXRhIjoie1wicGF0aFwiOlwiXC9wYWdlXC90ZXJtc1wifSIsImlzc3VlZF9hdCI6MTMzMTY2OTE4NSwicGFnZSI6eyJpZCI6IjEzNzczOTk4Mjk0MjI3NCIsImxpa2VkIjpmYWxzZSwiYWRtaW4iOnRydWV9LCJ1c2VyIjp7ImNvdW50cnkiOiJ1cyIsImxvY2FsZSI6ImVuX1VTIiwiYWdlIjp7Im1pbiI6MjF9fX0'
+      @request        = Rack::MockRequest.env_for('/', lint: true, fatal: true,  method: 'POST', input: @signed_request)
+      @response       = Carrot::Facebook::Middleware.new(@app).call(@request)
+    end
+
+    it 'should properly set parameters passed to :facebook_data' do
+      pending
+    end
+  end
 end
