@@ -155,7 +155,7 @@ describe Carrot::Facebook::Middleware do
     end
   end
 
-  context "when sending parameters in the request" do
+  context "when sending a parameter in the request" do
     before(:all) do
       @data           = @valid_facebook_data.merge({ issued_at: 1331669185, app_data: { path: '/page/terms', params: { foo: 'bar' } } })
       @signed_request = "signed_request=#{encode_signed_request(@data)}"
@@ -163,12 +163,29 @@ describe Carrot::Facebook::Middleware do
       @response       = Carrot::Facebook::Middleware.new(@app).call(@request)
     end
 
-    it 'should properly set parameters passed to app_data within the signed request' do
+    it 'should properly set parameters passed to app_data on the signed request' do
       expect(@request[:facebook_data]).to eq @data
     end
     
     it 'should recognize the params object within app_data' do
       @request[:facebook_data][:app_data][:params].should == {foo: 'bar'}
+    end
+  end
+  
+  context "when sending multiple parameters in the request" do
+    before(:all) do
+      @data           = @valid_facebook_data.merge({ issued_at: 1331669185, app_data: { path: '/page/terms', params: { foo: 'bar', bar: 'baz', bee: 'bop' } } })
+      @signed_request = "signed_request=#{encode_signed_request(@data)}"
+      @request        = Rack::MockRequest.env_for('/', lint: true, fatal: true,  method: 'POST', input: @signed_request)
+      @response       = Carrot::Facebook::Middleware.new(@app).call(@request)
+    end
+
+    it 'should properly set parameters passed to app_data on the signed request' do
+      expect(@request[:facebook_data]).to eq @data
+    end
+    
+    it 'should recognize the params object within app_data' do
+      @request[:facebook_data][:app_data][:params].should == {foo: 'bar', bar: 'baz', bee: 'bop'}
     end
   end
 end

@@ -5,7 +5,7 @@ require "openssl"
 require "carrot-facebook"
 
 module Helpers
-  def encode_signed_request( options )
+  def encode_signed_request(options)
     encoded_data      = Base64.urlsafe_encode64( options.to_json ).tr('=', '')
     digestor          = OpenSSL::Digest::Digest.new('sha256')
     signature         = OpenSSL::HMAC.digest( digestor, '', encoded_data )
