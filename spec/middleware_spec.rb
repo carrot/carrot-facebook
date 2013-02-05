@@ -100,7 +100,7 @@ describe Carrot::Facebook::Middleware do
 
   context "when is a canvas app and sends a valid signed_request" do
     before(:all) do
-      @signed_request = 'signed_request=kUbujwbyaKAS3EMLSolZki1mJtuzY5-XUrchNN3MVyI.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImlzc3VlZF9hdCI6MTMzMTY2NTg5NCwicGFnZSI6eyJpZCI6IjEzNzczOTk4Mjk0MjI3NCIsImxpa2VkIjpmYWxzZSwiYWRtaW4iOnRydWV9LCJ1c2VyIjp7ImNvdW50cnkiOiJ1cyIsImxvY2FsZSI6ImVuX1VTIiwiYWdlIjp7Im1pbiI6MjF9fX0'
+      @signed_request = "signed_request=#{encode_signed_request(@valid_facebook_data)}"
       @request        = Rack::MockRequest.env_for('/', lint: true, fatal: true,  method: 'POST', input: @signed_request)
       @response       = Carrot::Facebook::Middleware.new(@app).call(@request)
     end
@@ -155,7 +155,7 @@ describe Carrot::Facebook::Middleware do
     end
   end
 
-  context "when sending a parameter in the request" do
+  context "when sending a parameter in the request with app_data" do
     before(:all) do
       @data           = @valid_facebook_data.merge({ issued_at: 1331669185, app_data: { path: '/page/terms', params: { foo: 'bar' } } })
       @signed_request = "signed_request=#{encode_signed_request(@data)}"
@@ -172,7 +172,7 @@ describe Carrot::Facebook::Middleware do
     end
   end
   
-  context "when sending multiple parameters in the request" do
+  context "when sending multiple parameters in the request with app_data" do
     before(:all) do
       @data           = @valid_facebook_data.merge({ issued_at: 1331669185, app_data: { path: '/page/terms', params: { foo: 'bar', bar: 'baz', bee: 'bop' } } })
       @signed_request = "signed_request=#{encode_signed_request(@data)}"
