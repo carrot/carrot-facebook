@@ -21,6 +21,7 @@ module Carrot
               begin
                 path_override                  = Yajl::Parser.parse(env[:facebook_data][:app_data], symbolize_keys: true) 
                 env['PATH_INFO']               = path_override[:path] if path_override[:path]
+                env['QUERY_STRING']            = path_override[:params].map { |params| params.join('=') }.join('&') if path_override[:params]
                 env[:facebook_data][:app_data] = path_override
               rescue => e
                 env[:facebook_data][:app_data] = env[:facebook_data][:app_data]
