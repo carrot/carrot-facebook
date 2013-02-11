@@ -64,7 +64,7 @@ module Carrot
           <script>
             FB.init({ appId: '#{opts[:app_id]}', xfbml: '#{opts[:xfbml]}' });
           </script>
-        }
+        }.html_safe
       end
     end
   end
