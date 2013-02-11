@@ -66,6 +66,10 @@ module Carrot
           </script>
         }.html_safe
       end
+
+      def auto_grow(timer = true)
+        content_tag(:script, "FB.Canvas.setAutoGrow(#{timer});")
+      end
     end
   end
 end
