@@ -1,3 +1,4 @@
+require "carrot-facebook/controller"
 require "carrot-facebook/middleware"
 require "carrot-facebook/version"
 require "carrot-facebook/view_helpers"
