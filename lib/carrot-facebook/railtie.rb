@@ -13,7 +13,7 @@ module Carrot
       end
 
       initializer "carrot.facebook.controller" do |app|
-        ActionController::Base.send :include, Controller
+        ActionController::Base.send :include, Carrot::Facebook::Controller
       end
     end
   end
