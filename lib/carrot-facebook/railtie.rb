@@ -14,6 +14,7 @@ module Carrot
 
       initializer "carrot.facebook.action_controller" do
         ActiveSupport.on_load(:action_controller) do
+          puts "include Carrot::Facebook::Controller"
           include Carrot::Facebook::Controller
         end
       end
