@@ -3,6 +3,15 @@ include ActionView::Helpers::TagHelper
 module Carrot
   module Facebook
     module ViewHelpers
+      def redirect_to_top *args
+        #if request_is_facebook_iframe?
+          @redirect_url = url_for(*args)
+          render :layout => false, :inline => "<html><head>\n<script type=\"text/javascript\">\nwindow.top.location.href = <%= @redirect_url.to_json -%>;\n</script>\n<noscript>\n<meta http-equiv=\"refresh\" content=\"0;url=<%=h @redirect_url %>\" />\n<meta http-equiv=\"window-target\" content=\"_top\" />\n</noscript>\n</head></html>\n"
+        #else
+        #  redirect_to(*args)
+        #end
+      end
+
       #extend ActionView::Helpers::AssetTagHelper
       # Public: Generates a user's Facebook avatar.
       #
