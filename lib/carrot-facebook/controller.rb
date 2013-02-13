@@ -9,6 +9,7 @@ module Carrot
           <html><head>
             <script type=\"text/javascript\">
               window.top.location.href = \"#{@redirect_url.to_json}\";
+              alert(\"test\");
             </script>
             <noscript>
               <meta http-equiv=\"refresh\" content=\"0;url=#{h @redirect_url}\" />
