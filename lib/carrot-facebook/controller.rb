@@ -1,3 +1,5 @@
+include ActionView::Helpers::TagHelper
+
 module Carrot
   module Facebook
     module Controller
