@@ -6,7 +6,8 @@ module Carrot
       extend ActiveSupport::Concern
 
       def top_redirect_to(*args)
-        #if request.env[:is_facebook_app]
+        Rails.logger request.inspect
+        if request.env[:is_facebook_app]
           @redirect_url = [ENV["FACEBOOK_APP_URL"], url_for(*args)].join
 
           render :layout => false, :inline => %Q{
@@ -20,9 +21,9 @@ module Carrot
               </noscript>
             </head></html>
           }.html_safe
-        #else
-        #  redirect_to(*args)
-        #end
+        else
+          redirect_to(*args)
+        end
       end
     end
   end
