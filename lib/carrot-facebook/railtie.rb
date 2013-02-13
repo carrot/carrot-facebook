@@ -11,6 +11,12 @@ module Carrot
       initializer "carrot.facebook.view_helpers" do
         ActionView::Base.send :include, ViewHelpers
       end
+
+      initializer "carrot.facebook.controller" do
+        ActiveSupport.on_load(:action_controller) do
+          include Controller
+        end
+      end
     end
   end
 end
