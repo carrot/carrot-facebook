@@ -1,7 +1,7 @@
 module Carrot
   module Facebook
     module Controller
-      extend ActiveSupport::Concerns
+      extend ActiveSupport::Concern
 
       def top_redirect_to(*args)
         @redirect_url = url_for(*args)
