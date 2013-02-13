@@ -10,7 +10,7 @@ module Carrot
         render :layout => false, :inline => %Q{
           <html><head>
             <script type="text/javascript">
-              window.top.location.href = "#{@redirect_url.to_json}";
+              window.top.location.href = #{@redirect_url.to_json};
             </script>
             <noscript>
               <meta http-equiv="refresh" content="0;url=#{@redirect_url}" />
