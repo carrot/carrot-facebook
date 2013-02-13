@@ -6,10 +6,11 @@ module Carrot
       extend ActiveSupport::Concern
 
       def top_redirect_to(*args)
+        logger.debug request.env[:is_facebook_app].inspect
+
         if request.env[:is_facebook_app]
           @redirect_url = [ENV["FACEBOOK_APP_URL"], url_for(*args)].join
 
-          logger.debug @redirect_url.inspect
           render :layout => false, :inline => %Q{
             <html><head>
               <script type="text/javascript">
