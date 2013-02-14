@@ -70,6 +70,20 @@ module Carrot
       def auto_grow(timer = true)
         content_tag(:script, "FB.Canvas.setAutoGrow(#{timer});")
       end
+
+       def facepile(fb_id = nil, row_number = 1, width = 300, show-count= true)
+        if fb_id
+          %Q{
+          <div class="fb-facepile" 
+          data-href="#{fb_app_url}" 
+          data-max-rows="#{row_number}"
+          data-show-count="#{show-count}"
+          data-width="#{width}">
+          </div>
+          }.html_safe
+        end
+      end
+      
     end
   end
 end
