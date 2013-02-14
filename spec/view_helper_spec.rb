@@ -77,4 +77,27 @@ describe Carrot::Facebook::ViewHelpers, :type => :helper do
       expect(output).to match /xfbml: 'false'/
     end
   end
+
+  context "#facepile" do
+    it "should raise error if url is not provided" do
+      expect { helper.facepile }.to raise_error
+    end
+
+    it "should not raise error if ENV variable is provided" do
+      ENV.stub(:[]).with("FACEBOOK_APP_URL").and_return("asdf")
+      expect { helper.facepile }.to_not raise_error
+    end
+
+    it "should not raise error if :href parameter is provided" do
+      expect { helper.facepile(href: "http://carrotcreative.com/") }.to_not raise_error
+    end
+
+    it "should correctly set output HTML" do
+      ENV.stub(:[]).with("FACEBOOK_APP_URL").and_return("http://carrotcreative.com/")
+      expect(helper.facepile).to match /data-href="http:\/\/carrotcreative.com\//
+      expect(helper.facepile(max_rows: 2)).to match /data-max-rows="2"/
+      expect(helper.facepile(width: 400)).to match /data-width="400"/
+      expect(helper.facepile(show_count: false)).to match /data-show-count="false"/
+    end
+  end
 end
