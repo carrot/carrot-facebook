@@ -81,7 +81,7 @@ module Carrot
         if fb_app_url
           %Q{
           <div class="fb-facepile" 
-          data-href="#{opts[:fb_app_url]}" 
+          data-href="#{ENV['FACEBOOK_APP_URL']" 
           data-max-rows="#{opts[:row_number]}"
           data-show-count="#{opts[:show_count]}"
           data-width="#{opts[:width]}">
