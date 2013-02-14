@@ -72,24 +72,23 @@ module Carrot
       end
 
        def facepile(*options)
-        opts = {:fb_app_url => ENV['FACEBOOK_APP_URL'],
-                :row_number => 1,
+        opts = {:href => ENV['FACEBOOK_APP_URL'],
+                :max_rows => 1,
                 :width => 300,
                 :show_count => true }
         opts.merge!(options.first) unless options.empty?
 
-        if fb_app_url
-          %Q{
-          <div class="fb-facepile" 
-          data-href="#{ENV['FACEBOOK_APP_URL']" 
-          data-max-rows="#{opts[:row_number]}"
-          data-show-count="#{opts[:show_count]}"
-          data-width="#{opts[:width]}">
-          </div>
-          }.html_safe
-        end
+        raise "Must provide a :url option parameter or ENV['FACEBOOK_APP_URL']" unless opts[:href]
+        
+        %Q{
+        <div class="fb-facepile" 
+        data-href="#{opts[:href]}" 
+        data-max-rows="#{opts[:max_rows]}"
+        data-show-count="#{opts[:show_count]}"
+        data-width="#{opts[:width]}">
+        </div>
+        }.html_safe
       end
-      
     end
   end
 end
