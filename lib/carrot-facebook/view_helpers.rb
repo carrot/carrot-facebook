@@ -59,7 +59,7 @@ module Carrot
         opts.merge!(options.first) unless options.empty?
 
         %Q{
-          <div id="fb-root"></div>'
+          <div id="fb-root"></div>
           <script src="//connect.facebook.net/en_US/all.js"></script>
           <script>
             FB.init({ appId: '#{opts[:app_id]}', xfbml: '#{opts[:xfbml]}' });
