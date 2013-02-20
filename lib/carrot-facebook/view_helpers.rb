@@ -70,6 +70,25 @@ module Carrot
       def auto_grow(timer = true)
         content_tag(:script, "FB.Canvas.setAutoGrow(#{timer});")
       end
+
+       def facepile(*options)
+        opts = {:href => ENV['FACEBOOK_APP_URL'],
+                :max_rows => 1,
+                :width => 300,
+                :show_count => true }
+        opts.merge!(options.first) unless options.empty?
+
+        raise "Must provide a :url option parameter or ENV['FACEBOOK_APP_URL']" unless opts[:href]
+        
+        %Q{
+        <div class="fb-facepile" 
+        data-href="#{opts[:href]}" 
+        data-max-rows="#{opts[:max_rows]}"
+        data-show-count="#{opts[:show_count]}"
+        data-width="#{opts[:width]}">
+        </div>
+        }.html_safe
+      end
     end
   end
 end
