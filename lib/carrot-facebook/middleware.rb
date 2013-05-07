@@ -11,7 +11,7 @@ module Carrot
         request             = Rack::Request.new(env)
         env[:is_iframe_app] = false
 
-        if request.POST['signed_request']
+        if request.POST and request.POST['signed_request']
           env["REQUEST_METHOD"] = 'GET'
           env[:is_iframe_app]   = true
           env[:facebook_data]   = parsed_signed_request(request.POST['signed_request'])
